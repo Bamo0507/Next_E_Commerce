@@ -1,9 +1,23 @@
-import Image from "next/image";
+import { mockProducts } from "@/lib/mocks";
 
-export default function Home() {
+import { ProductCard } from "./ProductCard";
+
+export default function HomePage() {
   return (
-    <div>
-      Home
-    </div>
+    <main className='container mx-auto p-4'>
+      <h1 className='text-3xl font-bold mb-6'>
+        Home
+      </h1>
+
+      <p className="mb-3">Showing {mockProducts.length} products</p>
+
+      {/* Grids of Products */}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {mockProducts.map((product) => (
+          // REMEMBER: key is important and should be unique, that is how we render a list in react
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+    </main>
   );
 }
