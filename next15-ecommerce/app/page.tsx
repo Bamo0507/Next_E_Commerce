@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 export default async function HomePage() {
   const products = await prisma.product.findMany();
   console.log(products);
+  await new Promise((resolve) => setTimeout(resolve, 3000));
 
   return (
     <main className='container mx-auto p-4'>

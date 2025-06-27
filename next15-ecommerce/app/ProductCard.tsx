@@ -1,14 +1,15 @@
 import { formatPrice } from "@/lib/utils";
 import Image from "next/image";
 import { Product } from "./generated/prisma";
+import { Card, CardHeader, CardTitle, CardDescription, CardFooter} from "@/components/ui/card";
 
 export function ProductCard(
     { product }: { product: Product }
 ) {
     return (
-        <div className="bg-white shadow rounded-lg overflow-hidden">
-            {/* Image Next automatically optimizes images and creates different sizes of an image */}
+        <Card className="pt-0 overflow-hidden">
             <div className="relative aspect-video">
+            {/* Image Next automatically optimizes images and creates different sizes of an image */}
                 {product.image && (
                     <Image
                     src={product.image}
@@ -20,11 +21,16 @@ export function ProductCard(
                 )}
             </div>
 
-            <div className="p-4">
-                <h2 className="text-black text-lg font-semibold">{product.name}</h2>
-                <p className="text-gray-600">{formatPrice(product.price)}</p>
-                <p className="text-gray-600">{product.description}</p>
-            </div>
-        </div>
+            <CardHeader>
+                <CardTitle>{product.name}</CardTitle>
+                <CardDescription>{product.description}</CardDescription>
+            </CardHeader>
+
+            <CardFooter>
+             <p className="text-gray-600">{formatPrice(product.price)}</p>
+            </CardFooter>
+
+        </Card>
+            
     );
 }
